@@ -32,7 +32,4 @@ public class Bill {
         this.payTime = payTime;
         this.note = note;
     }
-    public Bill(String note) {
-        this.note = note;
-    }
 }
