@@ -1,7 +1,9 @@
 package com.zsh.restaurantsystem;
 
 import com.zsh.restaurantsystem.entity.User;
+import com.zsh.restaurantsystem.repository.AdminRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
@@ -18,11 +20,13 @@ class RestaurantSystemApplicationTests {
 
     @PersistenceContext
     private EntityManager em;
+    @Autowired
+    private AdminRepository adminRepository;
     @Test
     public void contextLoads() {
-        var birth = LocalDate.of(1998, Month.MARCH,8);
-        User user = new User(123,"zsh",birth,"4008823823");
-        em.persist(user);
+
+        adminRepository.deleteById(adminRepository.findId("zsh"));
     }
+
 
 }

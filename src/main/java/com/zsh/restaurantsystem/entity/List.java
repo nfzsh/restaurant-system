@@ -24,7 +24,7 @@ public class List {
     @ManyToOne
     Admin admin;
     @ManyToOne
-    Table table;
+    Tables tables;
     @ManyToOne
     Menu menu;
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
@@ -34,10 +34,10 @@ public class List {
     //未上菜为0，上菜为1，取消为2
     private int statue = 0;
 
-    public List(User user, Admin admin, Table table, Menu menu, int statue) {
+    public List(User user, Admin admin, Tables tables, Menu menu, int statue) {
         this.user = user;
         this.admin = admin;
-        this.table = table;
+        this.tables = tables;
         this.menu = menu;
         this.statue = statue;
     }

@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Setter
 @Entity
 @NoArgsConstructor
-public class Table {
+public class Tables {
     private static final int STATUE_ON = 1;
     private static final int STATUE_OFF = 0;
     @Id
@@ -24,7 +24,7 @@ public class Table {
     //默认为空 0
     private int statue = 0;
 
-    public Table(int no, int num, int statue) {
+    public Tables(int no, int num, int statue) {
         this.no = no;
         this.num = num;
         this.statue = statue;

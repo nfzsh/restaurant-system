@@ -1,0 +1,39 @@
+POST http://localhost:8080/api/admin/add
+Content-Type: application/json
+
+{
+  "name": "qwe",
+  "password": "123",
+  "authority": 0
+}
+
+###
+POST http://localhost:8080/api/admin/update
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "zsh",
+  "password": "",
+  "authority": 0
+
+}
+###
+POST http://localhost:8080/api/admin/delete
+Content-Type: application/json
+
+{
+  "id": 5
+}
+###
+POST http://localhost:8080/api/admin/select
+Content-Type: application/json
+
+{
+  "name": "zsh"
+}
+###
+GET http://localhost:8080/api/admin/select_all
+Content-Type: application/json
+
+###
