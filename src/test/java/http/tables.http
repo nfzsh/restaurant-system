@@ -1,0 +1,38 @@
+POST http://localhost:8080/api/admin/table/add
+Content-Type: application/json
+
+{
+  "no": 9999,
+  "num": 2
+
+}
+###
+POST http://localhost:8080/api/admin/table/delete
+Content-Type: application/json
+
+{
+  "id": 10
+
+}
+###
+POST http://localhost:8080/api/admin/table/update
+Content-Type: application/json
+
+{
+  "id": 11,
+  "no": 9999,
+  "num": 4
+
+}
+###
+POST http://localhost:8080/api/admin/table/select
+Content-Type: application/json
+
+{
+  "id": 11
+}
+###
+GET http://localhost:8080/api/admin/table/select_all
+Content-Type: application/json
+
+###

@@ -23,12 +23,12 @@ public class AdminController {
     PasswordEncoder passwordEncoder;
 
     @PostMapping("/select")
-    public Map SelectAdmin(@RequestBody Admin admin,HttpServletResponse response) {
+    public Map selectAdmin(@RequestBody Admin admin,HttpServletResponse response) {
         return Map.of("admin",adminService.getAdmin(admin.getName())) ;
     }
 
     @PostMapping("/add")
-    public void AddAdmin(@RequestBody Admin admin, HttpServletResponse response) {
+    public void addAdmin(@RequestBody Admin admin, HttpServletResponse response) {
         Optional.ofNullable(admin)
                 .ifPresentOrElse(u -> {
                     String swd;
