@@ -1,0 +1,42 @@
+POST http://localhost:8080/api/admin/menu/add
+Content-Type: application/json
+
+{
+  "pic": "测试图片地址",
+  "price": 20.32,
+  "name": "利巴韦林",
+  "num": -1
+
+}
+###
+POST http://localhost:8080/api/admin/menu/delete
+Content-Type: application/json
+
+{
+  "id": 4
+
+}
+###
+POST http://localhost:8080/api/admin/menu/update
+Content-Type: application/json
+
+{
+  "id": 5,
+  "pic": "测试图片地址",
+  "price": 20.32,
+  "name": "扑热息痛",
+  "num": -1
+}
+###
+
+POST http://localhost:8080/api/admin/menu/get
+Content-Type: application/json
+
+{
+  "id": 5
+}
+###
+GET http://localhost:8080/api/admin/menu/get_all
+Content-Type: application/json
+
+###
