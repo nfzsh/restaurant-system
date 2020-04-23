@@ -1,0 +1,47 @@
+POST http://localhost:8080/api/User/select
+Content-Type: application/x-www-form-urlencoded
+
+s=4&a=2
+###
+POST http://localhost:8080/api/User/add
+Content-Type: application/json
+
+{
+  "openid": 1231,
+  "name": "lbw",
+  "birth": "1993-08-11",
+  "phone_num": "CCTV1"
+}
+
+###
+POST http://localhost:8080/api/User/select_id
+Content-Type: application/json
+
+{
+  "openid": 1231
+}
+###
+GET http://localhost:8080/api/User/select_all
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/api/User/update
+Content-Type: application/json
+
+{
+  "openid": 1234,
+  "name": "lj",
+  "birth": "1969-12-16",
+  "phone_num": "MI"
+}
+
+###
+POST http://localhost:8080/api/User/delete
+Content-Type: application/json
+
+{
+  "id": 2
+}
+
+###
