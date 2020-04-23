@@ -27,9 +27,9 @@ public class User {
             insertable = false)
     private LocalDateTime insertTime;
 
-    public User(int openid) {
-        this.openid = openid;
-    }
+//    public User(int id) {
+//        this.id = id;
+//    }
 
     public User(int openid, String name, LocalDate birth,
                 String phone_num) {

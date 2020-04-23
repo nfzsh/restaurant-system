@@ -18,8 +18,8 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne
-    User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
     float price;
     int statue = 0;
     private LocalDateTime payTime;
