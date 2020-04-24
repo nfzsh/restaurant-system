@@ -5,7 +5,21 @@ Content-Type: application/json
   "user": {
     "id": 3
   },
+  "payTime": "2020-04-24T20:43:54",
   "price": 10.32,
   "statue": 1
 }
+
+###
+POST http://localhost:8080/api/bill/select_uid
+Content-Type: application/json
+
+{
+  "id": 4
+}
+
+###
+GET http://localhost:8080/api/bill/select_all
+Content-Type: application/json
+
 ###
