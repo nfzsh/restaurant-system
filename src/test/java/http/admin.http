@@ -9,6 +9,8 @@ Content-Type: application/json
 
 ###
 POST http://localhost:8080/api/admin/update
+token: c7e6f33821957cb98f9cc0ce108d14b69b8cc6f7e2adcbde48e7261dffb828531d84af1ab941d771aba6eb4e9e39ef0a
+role: 6983f953b49c88210cb9
 Content-Type: application/json
 
 {
