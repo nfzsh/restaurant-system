@@ -27,6 +27,10 @@ public class List {
     Tables tables;
     @ManyToOne
     Menu menu;
+    @ManyToOne
+    Bill bill;
+    int num;
+    float price;
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
            updatable = false,
            insertable = false)
@@ -34,11 +38,13 @@ public class List {
     //未上菜为0，上菜为1，取消为2
     private int statue = 0;
 
-    public List(User user, Admin admin, Tables tables, Menu menu, int statue) {
-        this.user = user;
-        this.admin = admin;
-        this.tables = tables;
-        this.menu = menu;
-        this.statue = statue;
-    }
+//    public List(User user, Admin admin, Tables tables, Menu menu, Bill bill, int num, int statue) {
+//        this.user = user;
+//        this.admin = admin;
+//        this.tables = tables;
+//        this.menu = menu;
+//        this.bill = bill;
+//        this.num = num;
+//        this.statue = statue;
+//    }
 }

@@ -1,0 +1,13 @@
+POST http://localhost:8080/api/3/bill/add
+Content-Type: application/json
+
+{
+  "tables": {
+    "id": 3
+  },
+  "menu": {
+    "id": 2
+  },
+  "num": 2,
+  "price": 10.32
+}
