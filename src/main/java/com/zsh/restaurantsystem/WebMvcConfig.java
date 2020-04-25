@@ -21,14 +21,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private User2Interceptor user2Interceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor)
-                .addPathPatterns("/api/**")
-                .excludePathPatterns("/api/login");
-        registry.addInterceptor(adminInterceptor)
-                .addPathPatterns("/api/admin");
-        registry.addInterceptor(user1Interceptor)
-                .addPathPatterns("/api/admin");
-        registry.addInterceptor(user2Interceptor)
-                .addPathPatterns("/api/admin");
+//        registry.addInterceptor(loginInterceptor)
+//                .addPathPatterns("/api/admin/**")
+//                .excludePathPatterns("/api/login");
+//        registry.addInterceptor(adminInterceptor)
+//                .addPathPatterns("/api/admin");
+//        registry.addInterceptor(user1Interceptor)
+//                .addPathPatterns("/api/admin");
+//        registry.addInterceptor(user2Interceptor)
+//                .addPathPatterns("/api/admin");
     }
 }
