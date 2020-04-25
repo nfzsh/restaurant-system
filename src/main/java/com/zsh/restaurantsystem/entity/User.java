@@ -17,7 +17,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int openid;
+    private String openid;
+    private String session_id;
     private String name;
     private LocalDate birth;
     private String phone_num;
@@ -31,11 +32,11 @@ public class User {
 //        this.id = id;
 //    }
 
-    public User(int openid, String name, LocalDate birth,
-                String phone_num) {
-        this.openid = openid;
-        this.name = name;
-        this.birth = birth;
-        this.phone_num = phone_num;
-    }
+//    public User(int openid, String name, LocalDate birth,
+//                String phone_num) {
+//        this.openid = openid;
+//        this.name = name;
+//        this.birth = birth;
+//        this.phone_num = phone_num;
+//    }
 }
