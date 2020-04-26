@@ -15,7 +15,7 @@ public interface UserRepository extends CustomizedRepoistory<User, Integer> {
     List<User> getUserByName(@Param("name") String name);
 
     @Query("SELECT u FROM User u WHERE u.openid=:openid")
-    User getUserByOpenid(@Param("openid") int openid);
+    User getUserByOpenid(@Param("openid") String openid);
 
     @Query("SELECT u FROM User u WHERE u.phone_num LIKE CONCAT('%',:phone_num,'%')")
     List<User> getUser(@Param("phone_num") String phone_num);

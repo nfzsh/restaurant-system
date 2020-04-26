@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -17,8 +18,11 @@ public class UserService {
     public void setUser(User user) {
         userRepository.save(user);
     }
+    public Optional<User> findUser(int id){
+        return userRepository.findById(id);
+    }
 
-    public User getUserByOpenid(int openid) {
+    public User getUserByOpenid(String openid) {
         return userRepository.getUserByOpenid(openid);
     }
 

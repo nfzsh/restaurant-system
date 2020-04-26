@@ -1,9 +1,6 @@
 package com.zsh.restaurantsystem;
 
-import com.zsh.restaurantsystem.interceptor.AdminInterceptor;
-import com.zsh.restaurantsystem.interceptor.LoginInterceptor;
-import com.zsh.restaurantsystem.interceptor.User1Interceptor;
-import com.zsh.restaurantsystem.interceptor.User2Interceptor;
+import com.zsh.restaurantsystem.interceptor.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -19,6 +16,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private User1Interceptor user1Interceptor;
     @Autowired
     private User2Interceptor user2Interceptor;
+    @Autowired
+    private WeChatInterceptor weChatInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(loginInterceptor)
@@ -30,5 +29,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //                .addPathPatterns("/api/admin");
 //        registry.addInterceptor(user2Interceptor)
 //                .addPathPatterns("/api/admin");
+        registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/api/wechat/**")
+                .excludePathPatterns("/api/wechat/login");
     }
 }

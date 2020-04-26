@@ -18,10 +18,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String openid;
-    private String session_id;
+    private String session_key;
     private String name;
     private LocalDate birth;
     private String phone_num;
+    private String nickName;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
             updatable = false,

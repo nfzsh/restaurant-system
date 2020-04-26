@@ -1,6 +1,10 @@
 package com.zsh.restaurantsystem.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zsh.restaurantsystem.component.EncryptorComponent;
+import com.zsh.restaurantsystem.entity.User;
+import com.zsh.restaurantsystem.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -10,10 +14,13 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/wechat")
+@RequestMapping("/api/wechat")
 public class WeChatLoginController {
 
     @Value("${wechat.appid}")
@@ -23,9 +30,14 @@ public class WeChatLoginController {
 
     private String openid;
     private String session_key;
+    private String name;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private EncryptorComponent encryptorComponent;
 
-    @PostMapping("/index")
-    private String login(@RequestParam String code) {
+    @PostMapping("/login")
+    private String login(@RequestParam String code, HttpServletResponse httpServletResponse) {
         // 创建Httpclient对象
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String resultString = "";
@@ -54,10 +66,35 @@ public class WeChatLoginController {
         JSONObject jsonObject = (JSONObject) JSONObject.parse(resultString);
         session_key = jsonObject.get("session_key") + "";
         openid = jsonObject.get("openid") + "";
+        name = jsonObject.get("nickname")+"";
+        User user = userService.getUserByOpenid(openid);
 
-        System.out.println("session_key==" + session_key);
-        System.out.println("openid==" + openid);
+        if(user==null) {
+            user = new User();
+            user.setOpenid(openid);
+            user.setName(name);
+        }
+        user.setSession_key(session_key);
+        user.setName(name);
+        userService.setUser(user);
+        user = userService.getUserByOpenid(openid);
+        Map map = Map.of("uid", user.getId());
+        // 生成加密token
+        String token = encryptorComponent.encrypt(map);
+        // 在header创建自定义的权限
+        httpServletResponse.setHeader("token", token);
+//        System.out.println("session_key==" + session_key);
+//        System.out.println("openid==" + openid);
         return resultString;
+    }
+    @PostMapping("/getUserInfo")
+    private String getUserInfo(@RequestParam String code,
+                               @RequestAttribute int uid){
+
+        User user = userService.findUser(uid).get();
+        user.setName(code);
+        userService.setUser(user);
+        return code;
     }
 
 }

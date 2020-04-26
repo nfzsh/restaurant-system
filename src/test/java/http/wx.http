@@ -1,6 +1,15 @@
-POST http://localhost:8080/wechat/index
+POST http://localhost:8080/api/wechat/login
+token: d8a040674e66805348f39084c7b9de5a4bcd7e664708fdafc88eda391e7a6d27
 Content-Type: application/x-www-form-urlencoded
 
-code=071X611z06F2bb1fQDZy0dv41z0X6119
+code=071P4rja1UMmeM1yJhla1cjIja1P4rjt
+
+###
+
+POST http://localhost:8080/api/wechat/getUserInfo
+token: d8a040674e66805348f39084c7b9de5a4bcd7e664708fdafc88eda391e7a6d27
+Content-Type: application/x-www-form-urlencoded
+
+code=祝世豪
 
 ###
