@@ -66,7 +66,6 @@ public class WeChatLoginController {
         JSONObject jsonObject = (JSONObject) JSONObject.parse(resultString);
         session_key = jsonObject.get("session_key") + "";
         openid = jsonObject.get("openid") + "";
-        name = jsonObject.get("nickname")+"";
         User user = userService.getUserByOpenid(openid);
 
         if(user==null) {
@@ -75,7 +74,6 @@ public class WeChatLoginController {
             user.setName(name);
         }
         user.setSession_key(session_key);
-        user.setName(name);
         userService.setUser(user);
         user = userService.getUserByOpenid(openid);
         Map map = Map.of("uid", user.getId());
@@ -83,8 +81,8 @@ public class WeChatLoginController {
         String token = encryptorComponent.encrypt(map);
         // 在header创建自定义的权限
         httpServletResponse.setHeader("token", token);
-//        System.out.println("session_key==" + session_key);
-//        System.out.println("openid==" + openid);
+        System.out.println("session_key==" + session_key);
+        System.out.println("openid==" + openid);
         return resultString;
     }
     @PostMapping("/getUserInfo")
@@ -94,6 +92,7 @@ public class WeChatLoginController {
         User user = userService.findUser(uid).get();
         user.setName(code);
         userService.setUser(user);
+        System.out.println(code);
         return code;
     }
 
