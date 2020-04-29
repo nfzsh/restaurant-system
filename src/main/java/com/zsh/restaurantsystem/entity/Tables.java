@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -23,6 +24,8 @@ public class Tables {
     private int num;
     //默认为空 0
     private int statue = 0;
+    private LocalDateTime beginTime;
+    private LocalDateTime finishTime;
 
     public Tables(int no, int num, int statue) {
         this.no = no;

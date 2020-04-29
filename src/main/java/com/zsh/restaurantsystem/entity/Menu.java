@@ -21,6 +21,7 @@ public class Menu {
     private String pic;
     private float price;
     private String name;
+    private int type;
     private int num;//-1为不限量
 
     public Menu(String pic, float price, String name, int num) {
