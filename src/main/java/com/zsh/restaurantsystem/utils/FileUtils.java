@@ -6,10 +6,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class FileUtils {
-    public static boolean upload(MultipartFile file, String path, String fileName){
+    public static String upload(MultipartFile file, String path, String fileName){
 
         // 生成新的文件名
-        String realPath = path + "/" + FikeNameUtils.getFileName(fileName);
+        String realName = FikeNameUtils.getFileName(fileName);
+        String realPath = path + "/" + realName;
 
         //使用原文件名
         // String realPath = path + "/" + fileName;
@@ -24,14 +25,14 @@ public class FileUtils {
         try {
             //保存文件
             file.transferTo(dest);
-            return true;
+            return realName;
         } catch (IllegalStateException e) {
             e.printStackTrace();
-            return false;
+            return "0";
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            return "0";
         }
-
     }
+
 }

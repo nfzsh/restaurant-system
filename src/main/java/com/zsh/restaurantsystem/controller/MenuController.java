@@ -34,55 +34,54 @@ public class MenuController {
 //
 
     @PostMapping("/add")
-    public Map setMenu(@RequestBody Menu menu, HttpServletResponse response){
+    public Map setMenu(@RequestBody Menu menu, HttpServletResponse response) {
         int a = menuService.setMenu(menu);
-        return Map.of("message",a);
+        return Map.of("message", a);
     }
 
     @PostMapping("/delete")
-    public void deleteMenu(@RequestBody Menu menu,HttpServletResponse response){
+    public void deleteMenu(@RequestBody Menu menu, HttpServletResponse response) {
         menuService.deleteMenu(menu);
     }
 
     @PostMapping("/update")
-    public Map updateMenu(@RequestBody Menu menu,HttpServletResponse response){
+    public Map updateMenu(@RequestBody Menu menu, HttpServletResponse response) {
         int a = menuService.updateMenu(menu);
-        return Map.of("message",a);
+        return Map.of("message", a);
     }
 
     @PostMapping("/get")
-    public Map getOne(@RequestBody Menu menu,HttpServletResponse response){
-        return Map.of("menu",menuService.getMenu(menu));
+    public Map getOne(@RequestBody Menu menu, HttpServletResponse response) {
+        return Map.of("menu", menuService.getMenu(menu));
     }
 
     @GetMapping("/get_all")
-    public Map getAll(){
-        return Map.of("menus",menuService.getAllMenu());
+    public Map getAll() {
+        return Map.of("menus", menuService.getAllMenu());
     }
 
     //上传文件
     @ResponseBody
-    @RequestMapping("/fileUpload")
-    public String upload(@RequestParam("file") MultipartFile file ){
-        //1定义要上传文件 的存放路径
-        String localPath="D:/image";
-        //2获得文件名字
-        String fileName=file.getOriginalFilename();
-        //2上传失败提示
-        String warning="";
-        if(FileUtils.upload(file, localPath, fileName)){
+    @PostMapping("/fileUpload")
+    public String upload(@RequestParam("file") MultipartFile file) {
+        //获得文件名字
+        String fileName = file.getOriginalFilename();
+        //上传失败提示
+        String warning = "";
+        String name = FileUtils.upload(file, path, fileName);
+        if (!name.equals("0")) {
             //上传成功
-            warning="上传成功";
+            warning = "上传成功";
 
-        }else{
-            warning="上传失败";
+        } else {
+            warning = "上传失败";
         }
         System.out.println(warning);
         return "上传成功";
     }
 
     @RequestMapping("show")
-    public ResponseEntity  show(String fileName){
+    public ResponseEntity show(String fileName) {
 
 
         try {
