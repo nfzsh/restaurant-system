@@ -20,9 +20,13 @@ public class User {
     private String openid;
     private String session_key;
     private String name;
+    private String avatarUrl;
     private LocalDate birth;
     private String phone_num;
-    private String nickName;
+    private String gender;
+    private String province;
+    private String city;
+    private String country;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
             updatable = false,

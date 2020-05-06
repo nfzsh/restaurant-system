@@ -15,9 +15,16 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    public void updateUser(User user) {
+        User u = userRepository.findById(user.getId()).get();
+        user.setSession_key(u.getSession_key());
+        user.setOpenid(u.getOpenid());
+        userRepository.save(user);
+    }
     public void setUser(User user) {
         userRepository.save(user);
     }
+
     public Optional<User> findUser(int id){
         return userRepository.findById(id);
     }

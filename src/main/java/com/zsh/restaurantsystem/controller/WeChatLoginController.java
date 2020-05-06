@@ -29,7 +29,6 @@ public class WeChatLoginController {
 
     private String openid;
     private String session_key;
-    private String name;
     @Autowired
     private UserService userService;
     @Autowired
@@ -70,7 +69,6 @@ public class WeChatLoginController {
         if(user==null) {
             user = new User();
             user.setOpenid(openid);
-            user.setName(name);
         }
         user.setSession_key(session_key);
         userService.setUser(user);
@@ -85,14 +83,12 @@ public class WeChatLoginController {
         return resultString;
     }
     @PostMapping("/getUserInfo")
-    private String getUserInfo(@RequestParam String code,
+    private void getUserInfo(@RequestBody User user,
                                @RequestAttribute int uid){
 
-        User user = userService.findUser(uid).get();
-        user.setName(code);
-        userService.setUser(user);
-        System.out.println(code);
-        return code;
+        user.setId(uid);
+        userService.updateUser(user);
+        System.out.println(user);
     }
 
 }

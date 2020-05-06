@@ -21,8 +21,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/admin")
 public class AdminLoginController {
+    //前台
     private static final String USER1_ROLE = "bb63e5f7e0f2ffae845c";
+    //管理权限
     private static final String ADMIN_ROLE = "6983f953b49c88210cb9";
+    //后厨
     private static final String USER2_ROLE = "783f956f147597a7d921";
     @Autowired
     private AdminService adminService;

@@ -29,7 +29,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //                .addPathPatterns("/api/admin");
 //        registry.addInterceptor(user2Interceptor)
 //                .addPathPatterns("/api/admin");
-        registry.addInterceptor(loginInterceptor)
+        registry.addInterceptor(weChatInterceptor)
                 .addPathPatterns("/api/wechat/**")
                 .excludePathPatterns("/api/wechat/login");
     }

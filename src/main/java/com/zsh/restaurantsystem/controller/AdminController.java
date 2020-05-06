@@ -22,13 +22,13 @@ public class AdminController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @PostMapping("/select")
-    public Map selectAdmin(@RequestBody Admin admin,HttpServletResponse response) {
-        return Map.of("admin",adminService.getAdmin(admin.getName())) ;
+    @GetMapping("/select/{name}")
+    public Map selectAdmin(@PathVariable String name,HttpServletResponse response) {
+        return Map.of("admin",adminService.getAdmin(name)) ;
     }
 
     @PostMapping("/add")
-    public void addAdmin(@RequestBody Admin admin, HttpServletResponse response) {
+    public Map addAdmin(@RequestBody Admin admin, HttpServletResponse response) {
         Optional.ofNullable(admin)
                 .ifPresentOrElse(u -> {
                     String swd;
@@ -39,6 +39,7 @@ public class AdminController {
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
                 });
+        return Map.of("admins",adminService.getAllAdmin());
     }
 
     @GetMapping("/select_all")
@@ -46,13 +47,13 @@ public class AdminController {
         return Map.of("admins",adminService.getAllAdmin());
     }
 
-    @PostMapping("/delete")
-    public void deleteAdmin(@RequestBody Admin admin,HttpServletResponse response){
-        adminService.DeleteAdmin(admin.getId());
+    @GetMapping("/delete/{aid}")
+    public Map deleteAdmin(@PathVariable int aid,HttpServletResponse response){
+        return Map.of("admins",adminService.DeleteAdmin(aid));
     }
 
     @PostMapping("/update")
-    public void updateAdmin(@RequestBody Admin admin,HttpServletResponse response){
+    public Map updateAdmin(@RequestBody Admin admin,HttpServletResponse response){
         String pwd = "";
         if(admin.getPassword().equals(""))
             ;
@@ -60,6 +61,7 @@ public class AdminController {
         pwd = passwordEncoder.encode(admin.getPassword());
         admin.setPassword(pwd);
         adminService.UpdateAdmin(admin);
+        return Map.of("admins",adminService.getAllAdmin());
     }
 
 }

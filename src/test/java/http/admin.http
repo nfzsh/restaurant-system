@@ -2,7 +2,8 @@ POST http://localhost:8080/api/admin/add
 Content-Type: application/json
 
 {
-  "name": "qwe",
+  "id": "",
+  "name": "del3",
   "password": "123",
   "authority": 0
 }
@@ -14,26 +15,23 @@ role: 6983f953b49c88210cb9
 Content-Type: application/json
 
 {
-  "id": 3,
-  "name": "zsh",
+  "id": 11,
+  "name": "del3",
   "password": "",
-  "authority": 0
+  "authority": 2
 
 }
 ###
-POST http://localhost:8080/api/admin/delete
+GET http://localhost:8080/api/admin/delete/5
 Content-Type: application/json
 
-{
-  "id": 5
-}
 ###
-POST http://localhost:8080/api/admin/select
+GET http://localhost:8080/api/admin/select/zsh
 Content-Type: application/json
 
-{
-  "name": "zsh"
-}
+//{
+//  "name": "zsh"
+//}
 ###
 GET http://localhost:8080/api/admin/select_all
 Content-Type: application/json

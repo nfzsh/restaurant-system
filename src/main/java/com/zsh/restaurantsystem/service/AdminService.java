@@ -39,8 +39,9 @@ public class AdminService {
                     admin.getAuthority(),admin.getId());
 
     }
-    public void DeleteAdmin(int id){
+    public List<Admin> DeleteAdmin(int id){
         adminRepository.deleteById(id);
+        return adminRepository.findAll();
     }
 
 }

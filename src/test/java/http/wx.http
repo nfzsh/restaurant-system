@@ -1,8 +1,7 @@
 POST http://localhost:8080/api/wechat/login
-token: d8a040674e66805348f39084c7b9de5a4bcd7e664708fdafc88eda391e7a6d27
 Content-Type: application/x-www-form-urlencoded
 
-code=071P4rja1UMmeM1yJhla1cjIja1P4rjt
+code=061xr7S91t3DgN1PBUQ91vK9S91xr7SI
 
 ###
 

@@ -22,7 +22,6 @@ public class WeChatInterceptor implements HandlerInterceptor {
                 .ifPresentOrElse(token -> {
                     var map = encryptorComponent.decrypt(token);
                     request.setAttribute("uid", map.get("uid"));
-                    request.setAttribute("aid", map.get("aid"));
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "未登录！");
                 });
