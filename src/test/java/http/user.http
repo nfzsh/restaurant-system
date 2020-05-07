@@ -21,10 +21,6 @@ Content-Type: application/json
   "openid": 1231
 }
 ###
-GET http://localhost:8080/api/User/select_all
-Content-Type: application/json
-
-###
 
 POST http://localhost:8080/api/User/update
 Content-Type: application/json

@@ -24,24 +24,29 @@ public class MenuService {
             return 0;
     }
 
-    public void deleteMenu(Menu menu){
-        menuRepository.deleteById(menu.getId());
+    public List<Menu> deleteMenu(int mid){
+        int type = menuRepository.findById(mid).get().getType();
+        menuRepository.deleteById(mid);
+        return menuRepository.findMenusByType(type);
     }
 
-    public int updateMenu(Menu menu){
-        if(menu.getId()!=0) {
-            menuRepository.save(menu);
-            return 1;
-        }
-        else
-            return 0;
+    public List<Menu> updateMenu(Menu menu){
+        menu.setPic(menuRepository.findById(menu.getId()).get().getPic());
+        menuRepository.save(menu);
+        return menuRepository.findMenusByType(menu.getType());
     }
 
     public Optional<Menu> getMenu(Menu menu){
         return menuRepository.findById(menu.getId());
     }
+    public Menu getMenuById(int id){
+        return menuRepository.findById(id).get();
+    }
 
     public List<Menu> getAllMenu(){
         return menuRepository.findAll();
+    }
+    public List<Menu> getMenuByType(int type){
+        return menuRepository.findMenusByType(type);
     }
 }

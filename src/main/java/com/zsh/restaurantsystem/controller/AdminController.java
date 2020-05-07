@@ -2,6 +2,7 @@ package com.zsh.restaurantsystem.controller;
 
 import com.zsh.restaurantsystem.entity.Admin;
 import com.zsh.restaurantsystem.service.AdminService;
+import com.zsh.restaurantsystem.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,8 @@ public class AdminController {
     @Autowired
     AdminService adminService;
     @Autowired
+    UserService userService;
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @GetMapping("/select/{name}")
@@ -28,7 +31,7 @@ public class AdminController {
     }
 
     @PostMapping("/add")
-    public Map addAdmin(@RequestBody Admin admin, HttpServletResponse response) {
+    public Map addAdmin(@RequestBody Admin admin) {
         Optional.ofNullable(admin)
                 .ifPresentOrElse(u -> {
                     String swd;
@@ -62,6 +65,10 @@ public class AdminController {
         admin.setPassword(pwd);
         adminService.UpdateAdmin(admin);
         return Map.of("admins",adminService.getAllAdmin());
+    }
+    @GetMapping("/select_users")
+    public Map getAll() {
+        return Map.of("users", userService.getAll());
     }
 
 }

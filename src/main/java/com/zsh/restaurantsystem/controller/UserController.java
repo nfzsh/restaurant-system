@@ -17,11 +17,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/select_all")
-    public Map getAll() {
-        return Map.of("users", userService.getAll());
-    }
-
     @PostMapping("/select_id")
     public Map getUser(@RequestBody User user, HttpServletResponse response) {
         return Map.of("User", userService.getUserByOpenid(user.getOpenid()));
