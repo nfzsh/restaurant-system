@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
   "id": "",
-  "name": "del3",
+  "name": "zsh",
   "password": "123",
   "authority": 0
 }
