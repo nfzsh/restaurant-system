@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -59,7 +60,8 @@ public class User1Service {
         return b;
     }
     public void payBill(int bid) {
-        billRepository.payBill(bid, 1);
+        LocalDate d = LocalDate.now();
+        billRepository.payBill(bid, 1,d);
     }
     public List<com.zsh.restaurantsystem.entity.List> getListsByTable(int tid) {
         return listRepository.getList(tid);
