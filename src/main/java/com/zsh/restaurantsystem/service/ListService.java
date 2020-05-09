@@ -24,8 +24,8 @@ public class ListService {
     }
 
     //根据bill查详情
-    public java.util.List<List> getListByBill(Bill bill, int uid) {
-        return listRepository.getList(uid, bill.getId());
+    public java.util.List<List> getListByBid(int bid) {
+        return listRepository.getListByBid(bid);
     }
 
     //当前点菜情况
@@ -43,4 +43,12 @@ public class ListService {
         listRepository.setBillNum(list.getNum(), uid);
     }
 
+    //查询菜品状态
+    public java.util.List<List> getNowListByOrder() {
+        return listRepository.getNowListOrderByStatue();
+    }
+    //更新菜品状态
+    public void setListStatue(int statue, int lid) {
+        listRepository.setBillStatue(statue, lid);
+    }
 }

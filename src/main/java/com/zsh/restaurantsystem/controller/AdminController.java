@@ -2,6 +2,8 @@ package com.zsh.restaurantsystem.controller;
 
 import com.zsh.restaurantsystem.entity.Admin;
 import com.zsh.restaurantsystem.service.AdminService;
+import com.zsh.restaurantsystem.service.BillService;
+import com.zsh.restaurantsystem.service.ListService;
 import com.zsh.restaurantsystem.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,10 @@ public class AdminController {
     AdminService adminService;
     @Autowired
     UserService userService;
+    @Autowired
+    BillService billService;
+    @Autowired
+    ListService listService;
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -71,4 +77,12 @@ public class AdminController {
         return Map.of("users", userService.getAll());
     }
 
+    @GetMapping("/bill/getAll")
+    public Map getAllBills(){
+        return Map.of("bills",billService.getAllBill());
+    }
+    @GetMapping("/list/get/{bid}")
+    public Map getListByBid(@PathVariable int bid){
+        return Map.of("lists",listService.getListByBid(bid));
+    }
 }

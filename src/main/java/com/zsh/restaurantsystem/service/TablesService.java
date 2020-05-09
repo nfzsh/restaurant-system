@@ -1,5 +1,6 @@
 package com.zsh.restaurantsystem.service;
 
+import com.zsh.restaurantsystem.entity.TableNum;
 import com.zsh.restaurantsystem.entity.Tables;
 import com.zsh.restaurantsystem.repository.TablesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,10 @@ public class TablesService {
     private TablesRepository tablesRepository;
 
     public int setTables(Tables tables) {
-        if (tablesRepository.findNo(tables.getNo()) == null){
+        if (tablesRepository.findNo(tables.getNo()) == null) {
             tablesRepository.save(tables);
             return 1;
-        }
-        else
+        } else
             return 0;
 
     }
@@ -37,8 +37,18 @@ public class TablesService {
     public Optional<Tables> getTables(Tables tables) {
         return tablesRepository.findById(tables.getId());
     }
-    public List<Tables> getAll(){
+
+    public List<Tables> getAll() {
         return tablesRepository.findAll();
     }
 
+    //获取桌子类型（可用人数区分）及总数
+    public List<TableNum> getTableNumBy() {
+        return tablesRepository.findTableNumBy();
+    }
+
+    //获取桌子类型及剩余数量
+    public List<TableNum> getTableNumByStatue() {
+        return tablesRepository.findTableNumByStatue();
+    }
 }

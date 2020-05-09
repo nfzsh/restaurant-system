@@ -3,11 +3,17 @@ Content-Type: application/json
 
 {
   "tables": {
-    "id": 3
+    "id": 8
   },
   "menu": {
     "id": 2
   },
-  "num": 2,
-  "price": 10.32
+  "num": 1,
+  "price": 5.32
 }
+
+###
+GET http://localhost:8080/api/user2/getByStatue
+Content-Type: application/json
+
+###

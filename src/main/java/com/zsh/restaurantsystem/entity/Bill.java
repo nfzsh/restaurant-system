@@ -12,13 +12,13 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 public class Bill {
-    public static final int BILL_STATUE_W = 0;
-    public static final int BILL_STATUE_R = 1;
-    public static final int BILL_STATUE_O = 2;
+    public static final int BILL_STATUE_W = 0; //未支付
+    public static final int BILL_STATUE_R = 1; //已支付
+    public static final int BILL_STATUE_O = 2; //取消
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private User user;
     float price;
     int statue = 0;

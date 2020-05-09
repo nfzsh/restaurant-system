@@ -19,7 +19,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8080/api/bill/select_all
+GET http://localhost:8080/api/admin/bill/getAll
 Content-Type: application/json
 
 ###

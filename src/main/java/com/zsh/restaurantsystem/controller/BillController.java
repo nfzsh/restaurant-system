@@ -35,8 +35,8 @@ public class BillController {
     public Map selectBill(@RequestBody Bill bill){
         return Map.of("bill",billService.getBill(bill));
     }
-    @GetMapping("/select_all")
-    public Map selectAll(){
-        return Map.of("bills",billService.getAllBill());
-    }
+//    @GetMapping("/select_all")
+//    public Map selectAll(){
+//        return Map.of("bills",billService.getAllBill());
+//    }
 }

@@ -30,25 +30,25 @@ public class ListController {
 
     //根据bill_id查详情
     @PostMapping("/select_bill")
-    public void selectListByBill(@RequestBody Bill bill, @RequestAttribute int uid) {
-        listService.getListByBill(bill, uid);
+    public void selectListByBill(@RequestBody Bill bill, @PathVariable int uid) {
+        listService.getListByBid(bill.getId());
     }
 
     //当前点菜情况
     @PostMapping("/select_now")
-    public void selectListNow(@RequestAttribute int uid) {
+    public void selectListNow(@PathVariable int uid) {
         listService.getListNow(uid);
     }
 
     //更新菜单bid
     @PostMapping("/update_bid")
-    public void setBillId(@RequestBody Bill bill, @RequestAttribute int uid) {
+    public void setBillId(@RequestBody Bill bill, @PathVariable int uid) {
         listService.setBillId(bill, uid);
     }
 
     //更新菜品数量
     @PostMapping("/update_num")
-    public void updateNum(@RequestBody List list, @RequestAttribute int uid) {
+    public void updateNum(@RequestBody List list, @PathVariable int uid) {
         listService.setListNum(list, uid);
     }
 }
