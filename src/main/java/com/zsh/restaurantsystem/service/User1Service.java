@@ -61,5 +61,8 @@ public class User1Service {
     public void payBill(int bid) {
         billRepository.payBill(bid, 1);
     }
+    public List<com.zsh.restaurantsystem.entity.List> getListsByTable(int tid) {
+        return listRepository.getList(tid);
+    }
 
 }

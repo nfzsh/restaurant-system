@@ -35,6 +35,11 @@ public class User1Controller {
     public Map getAllTable() {
         return Map.of("tables", user1Service.findAllTables());
     }
+    //获取某桌当前点餐情况
+    @GetMapping("getList/{tid}")
+    public Map getListByTable(@PathVariable int tid) {
+        return Map.of("lists",user1Service.getListsByTable(tid));
+    }
 
     //开台
     @GetMapping("/updateStatue/{tid}")
