@@ -1,5 +1,6 @@
 package com.zsh.restaurantsystem.service;
 
+import com.zsh.restaurantsystem.entity.Admin;
 import com.zsh.restaurantsystem.entity.Bill;
 import com.zsh.restaurantsystem.entity.List;
 import com.zsh.restaurantsystem.repository.ListRepository;
@@ -17,6 +18,15 @@ public class ListService {
         list.setPrice(listRepository.getPrice(list.getMenu().getId()));
         listRepository.save(list);
         return listRepository.refresh(list);
+    }
+    public void setAdmin(Admin admin,int lid) {
+        List l = listRepository.findById(lid).get();
+        l.setAdmin(admin);
+        listRepository.save(l);
+    }
+
+    public List getListById(int id) {
+        return listRepository.findById(id).get();
     }
 
     public void deleteList(List list) {
