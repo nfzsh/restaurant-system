@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 
 @Repository
 public class RedisRepositoryImpl implements RedisRepository {
-    private static final String KEY = "RedisQueue";
     private final RedisTemplate<String,Object> redisTemplate;
     private ListOperations listOperations;
 
@@ -51,18 +50,18 @@ public class RedisRepositoryImpl implements RedisRepository {
         return todayEnd.getTimeInMillis()-new Date().getTime();
     }
 
-    public void add(RedisQueue redisQueue) {
-        listOperations.rightPush(KEY, redisQueue);
+    public void add(RedisQueue redisQueue,int tn) {
+        listOperations.rightPush(tn+"", redisQueue);
     }
-    public String deleteFirst() {
-        String id = listOperations.index(KEY, 0).toString();
-        listOperations.trim(KEY, 1, -1);
+    public String deleteFirst(int tn) {
+        String id = listOperations.index(tn+"", 0).toString();
+        listOperations.trim(tn+"", 1, -1);
         return id;
     }
 
-    public int findOne(final String uid){
+    public String findOne(final String uid,int tn){
         int index = -1;
-        String s = JSON.toJSONString(listOperations.range(KEY, 0, -1));
+        String s = JSON.toJSONString(listOperations.range(tn+"", 0, -1));
         List<RedisQueue> redisQueueList = JSON.parseObject(s,new TypeReference<List<RedisQueue>>(){});
         for(int i = 0; i< redisQueueList.size(); i++){
 
@@ -70,9 +69,9 @@ public class RedisRepositoryImpl implements RedisRepository {
             if(a.getUid().equals(uid))
                 index = i;
         }
-        return index;
+        return index+"";
     }
-    public ArrayList<RedisQueue> findAll(){
-        return (ArrayList<RedisQueue>)listOperations.range(KEY, 0, -1);
+    public ArrayList<RedisQueue> findAll(int tn){
+        return (ArrayList<RedisQueue>)listOperations.range(tn+"", 0, -1);
     }
 }

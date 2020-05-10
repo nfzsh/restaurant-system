@@ -7,22 +7,22 @@ public interface RedisRepository {
     /**
      * 查询完整队列
      */
-    ArrayList<RedisQueue> findAll();
+    ArrayList<RedisQueue> findAll(int tn);
 
     /**
      * 排队
      */
-    void add(RedisQueue redisQueue);
+    void add(RedisQueue redisQueue,int tn);
 
     /**
      * 出队
      */
-    String deleteFirst();
+    String deleteFirst(int tn);
 
     /**
      * 查找排序
      */
-    int findOne(String id);
+    String findOne(String id,int tn);
     Long incr(long liveTime);
     Long getCurrent2TodayEndMillisTime();
 }

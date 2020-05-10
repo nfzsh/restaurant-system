@@ -3,46 +3,40 @@ package com.zsh.restaurantsystem.controller;
 import com.zsh.restaurantsystem.entity.RedisQueue;
 import com.zsh.restaurantsystem.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
 
-@Controller
-@RequestMapping("/")
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/user1")
 public class QueueController {
     @Autowired
     private RedisRepository redisRepository;
 
-    @RequestMapping("/")
-    public String index() {
-        return "";
+    @GetMapping("/selectIndex/{tn}/{uid}")
+    public Map selectIndex(
+            @PathVariable String uid, @PathVariable int tn) {
+        return Map.of(tn + "", redisRepository.findOne(uid, tn));
     }
 
-    @RequestMapping(value = "/selectIndex", method = RequestMethod.POST)
-    public ResponseEntity<String> selectIndex(
-            @RequestParam String uid){
-        return new ResponseEntity<>(String.valueOf(redisRepository.findOne(uid)), HttpStatus.OK);
+    @GetMapping("/values/{tn}")
+    public @ResponseBody
+    Map findAll(@PathVariable int tn) {
+        return Map.of("queue", redisRepository.findAll(tn));
     }
 
-    @RequestMapping("/values")
-    public @ResponseBody ArrayList<RedisQueue> findAll() {
-        return redisRepository.findAll();
-    }
-
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<String> add(
-            @RequestParam String uid) {
+    @GetMapping("/add/{tn}/{uid}")
+    public Map add(
+            @PathVariable String uid, @PathVariable int tn) {
         String a = redisRepository.incr(redisRepository.getCurrent2TodayEndMillisTime()).toString();
+        a = tn + "0" + a;
         RedisQueue redisQueue = new RedisQueue(uid, a);
-        redisRepository.add(redisQueue);
-        return new ResponseEntity<>(a,HttpStatus.OK);
+        redisRepository.add(redisQueue, tn);
+        return Map.of("num", a);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ResponseEntity<String> delete() {
-        redisRepository.deleteFirst();
-        return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("/delete/{tn}")
+    public void delete(@PathVariable int tn) {
+        redisRepository.deleteFirst(tn);
     }
 }

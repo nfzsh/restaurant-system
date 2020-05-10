@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -16,5 +17,5 @@ public interface BillRepository extends CustomizedRepoistory<Bill, Integer> {
 
     @Modifying
     @Query("UPDATE Bill b SET b.statue=:statue,b.payTime=:date WHERE b.id=:bid")
-    void payBill(@Param("bid")int bid, @Param("statue")int statue, @Param("date")LocalDate date);
+    void payBill(@Param("bid")int bid, @Param("statue")int statue, @Param("date") LocalDateTime date);
 }

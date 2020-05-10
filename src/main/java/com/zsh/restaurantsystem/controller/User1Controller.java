@@ -53,9 +53,14 @@ public class User1Controller {
         return Map.of("bill",user1Service.addBill(tid));
     }
     //付款
-    @GetMapping("/addBill/{bid}")
+    @GetMapping("/payBill/{bid}")
     public Map payBill(@PathVariable("bid") int bid) {
         user1Service.payBill(bid);
         return Map.of("tables",user1Service.findAllTables());
+    }
+    //根据人数获取空闲桌子
+    @GetMapping("/getTableByNum/{num}")
+    public Map getTable(@PathVariable("num")int num) {
+       return Map.of("tables",user1Service.tableOpenByStatue(num));
     }
 }

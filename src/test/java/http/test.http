@@ -1,6 +1,23 @@
-POST http://localhost:8080/selectIndex
+GET http://localhost:8080/api/user1/selectIndex/2/4
 Content-Type: application/x-www-form-urlencoded
 
 
-uid=999
+uid=3
+###
+
+GET http://localhost:8080/api/user1/add/4/11
+Content-Type: application/x-www-form-urlencoded
+
+
+uid=25
+###
+
+POST http://localhost:8080/values/8
+Content-Type: application/x-www-form-urlencoded
+
+###
+
+POST http://localhost:8080/delete
+Content-Type: application/x-www-form-urlencoded
+
 ###
