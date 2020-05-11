@@ -41,8 +41,8 @@ public class MenuController {
 
     //上传文件
     @ResponseBody
-    @PostMapping("/fileUpload/{mid}")
-    public ResponseEntity upload(@RequestParam("file") MultipartFile file, @PathVariable("mid") int id) {
+    @RequestMapping(value = "/fileUpload/{mid}", produces = "image/png")
+    public void upload(@RequestParam("file") MultipartFile file, @PathVariable("mid") int id) {
         //获得文件名字
         String fileName = file.getOriginalFilename();
         //上传失败提示
@@ -51,7 +51,6 @@ public class MenuController {
         if (!name.equals("0")) {
             //上传成功
             warning = "上传成功";
-            name = path + name;
             Menu m = menuService.getMenuById(id);
             m.setPic(name);
             menuService.setMenu(m);
@@ -60,12 +59,7 @@ public class MenuController {
             warning = "上传失败";
         }
         System.out.println(warning);
-        try {
-            // 由于是读取本机的文件，file是一定要加上的， path是在application配置文件中的路径
-            return ResponseEntity.ok(resourceLoader.getResource("file:" + name));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
+
     }
 
 
@@ -91,13 +85,13 @@ public class MenuController {
         return Map.of("menus", menuService.getMenuByType(type));
     }
 
-    @RequestMapping("/show")
-    public ResponseEntity show(String fileName) {
+    @RequestMapping(value = "/show/{fileName}", produces = "image/png")
+    public ResponseEntity show(@PathVariable("fileName") String fileName) {
 
 
         try {
             // 由于是读取本机的文件，file是一定要加上的， path是在application配置文件中的路径
-            return ResponseEntity.ok(resourceLoader.getResource("file:" + path + fileName));
+            return ResponseEntity.ok(resourceLoader.getResource("file:" + path + "/" + fileName));
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }

@@ -16,12 +16,9 @@ public class MenuService {
     MenuRepository menuRepository;
 
     public int setMenu(Menu menu){
-        if(menu.getId()==0) {
             menuRepository.save(menu);
             return 1;
-        }
-        else
-            return 0;
+
     }
 
     public List<Menu> deleteMenu(int mid){
