@@ -5,11 +5,9 @@ Content-Type: application/x-www-form-urlencoded
 uid=3
 ###
 
-GET http://localhost:8080/api/user1/add/4/11
+GET http://localhost:8080/api/user1/add/4/9
 Content-Type: application/x-www-form-urlencoded
 
-
-uid=25
 ###
 
 POST http://localhost:8080/values/8

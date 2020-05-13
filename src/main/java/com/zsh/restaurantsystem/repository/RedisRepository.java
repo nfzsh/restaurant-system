@@ -22,7 +22,8 @@ public interface RedisRepository {
     /**
      * 查找排序
      */
-    String findOne(String id,int tn);
+    int findOne(String id,int tn);
+    String findOneNum(final String uid,int tn);
     Long incr(long liveTime);
     Long getCurrent2TodayEndMillisTime();
 }

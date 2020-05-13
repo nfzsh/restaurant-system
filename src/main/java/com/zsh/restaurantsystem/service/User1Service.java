@@ -32,6 +32,21 @@ public class User1Service {
     public List findTableNumByStatue() {
         return tablesRepository.findTableNumByStatue();
     }
+    public List findTableNumByStatueWx() {
+        List<TableNum> a = tablesRepository.findTableNumBy();
+        List<TableNum> t = tablesRepository.findTableNumByStatue();
+        for(int i=0;i<a.size();i++){
+            l:for (int j=0;j<t.size();j++){
+                if(a.get(i).getNum()==t.get(j).getNum()){
+                    a.get(i).setCount(t.get(j).getCount());
+                    break l;
+                }
+                else a.get(i).setCount(0);
+            }
+        }
+
+        return a;
+    }
 
     public List findAllTables() {
         return tablesRepository.findAll();

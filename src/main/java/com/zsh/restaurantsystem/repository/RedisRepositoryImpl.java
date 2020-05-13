@@ -59,7 +59,7 @@ public class RedisRepositoryImpl implements RedisRepository {
         return id;
     }
 
-    public String findOne(final String uid,int tn){
+    public int findOne(final String uid,int tn){
         int index = -1;
         String s = JSON.toJSONString(listOperations.range(tn+"", 0, -1));
         List<RedisQueue> redisQueueList = JSON.parseObject(s,new TypeReference<List<RedisQueue>>(){});
@@ -69,7 +69,19 @@ public class RedisRepositoryImpl implements RedisRepository {
             if(a.getUid().equals(uid))
                 index = i;
         }
-        return index+"";
+        return index;
+    }
+    public String findOneNum(final String uid,int tn){
+        RedisQueue index = null;
+        String s = JSON.toJSONString(listOperations.range(tn+"", 0, -1));
+        List<RedisQueue> redisQueueList = JSON.parseObject(s,new TypeReference<List<RedisQueue>>(){});
+        for(int i = 0; i< redisQueueList.size(); i++){
+
+            RedisQueue a = redisQueueList.get(i);
+            if(a.getUid().equals(uid))
+                index = a;
+        }
+        return index.getNum();
     }
     public ArrayList<RedisQueue> findAll(int tn){
         return (ArrayList<RedisQueue>)listOperations.range(tn+"", 0, -1);
