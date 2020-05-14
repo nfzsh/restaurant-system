@@ -2,12 +2,12 @@ package com.zsh.restaurantsystem.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zsh.restaurantsystem.component.EncryptorComponent;
+import com.zsh.restaurantsystem.entity.Bill;
 import com.zsh.restaurantsystem.entity.RedisQueue;
 import com.zsh.restaurantsystem.entity.TableNum;
 import com.zsh.restaurantsystem.entity.User;
 import com.zsh.restaurantsystem.repository.RedisRepository;
-import com.zsh.restaurantsystem.service.User1Service;
-import com.zsh.restaurantsystem.service.UserService;
+import com.zsh.restaurantsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -16,6 +16,8 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -39,9 +41,24 @@ public class WeChatLoginController {
     @Autowired
     private User1Service user1Service;
     @Autowired
+    private MenuService menuService;
+    @Autowired
     private RedisRepository redisRepository;
     @Autowired
     private EncryptorComponent encryptorComponent;
+    @Autowired
+    private ListService listService;
+    @Autowired
+    private BillService billService;
+
+    private final ResourceLoader resourceLoader;
+
+    @Value("${web.upload-path}")
+    private String path;
+
+    public WeChatLoginController(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
 
     @PostMapping("/login")
     private String login(@RequestParam String code, HttpServletResponse httpServletResponse) {
@@ -141,4 +158,55 @@ public class WeChatLoginController {
         return Map.of("lists",user1Service.getListsByTable(tid));
     }
 
+    @GetMapping("/getAllMenu")
+    public Map getAll() {
+        return Map.of("menus", menuService.getAllMenu());
+    }
+
+    @RequestMapping(value = "/show/{fileName}", produces = "image/png")
+    public ResponseEntity show(@PathVariable("fileName") String fileName) {
+
+
+        try {
+            // 由于是读取本机的文件，file是一定要加上的， path是在application配置文件中的路径
+            return ResponseEntity.ok(resourceLoader.getResource("file:" + path + "/" + fileName));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+    //当前点菜情况
+    @PostMapping("/select_now/tid")
+    public void selectListNow(@PathVariable int tid) {
+        listService.getListNow(tid);
+    }
+    @PostMapping("/addList")
+    public void setList(@RequestBody com.zsh.restaurantsystem.entity.List list, @RequestAttribute int uid) {
+        User user = new User();
+        user.setId(uid);
+        list.setUser(user);
+        listService.setList(list);
+    }
+    @GetMapping("/selectBill")
+    public Map selectBill(@RequestAttribute int uid){
+        User user = new User();
+        user.setId(uid);
+        return Map.of("bill",billService.getBillByUid(user));
+    }
+    @PostMapping("/update")
+    public void updateBill(@RequestBody Bill bill){
+        billService.updateBill(bill);
+    }
+    //根据bill_id查详情
+    @GetMapping("/selectLists/{bid}")
+    public Map selectListByBill(@PathVariable int bid) {
+        return Map.of("list",listService.getListByBid(bid));
+    }
+    //评价提交
+    @PostMapping("/note")
+    public void setNote(@RequestBody Bill bill){
+        Bill b = billService.getBill(bill).get();
+        b.setNote(bill.getNote());
+        billService.setBill(b);
+    }
 }

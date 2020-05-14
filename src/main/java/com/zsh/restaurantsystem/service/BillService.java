@@ -16,8 +16,13 @@ public class BillService {
     @Autowired
     BillRepository billRepository;
 
-    public Bill setBill(Bill bill) {
+    public void setBill(Bill bill) {
         billRepository.save(bill);
+    }
+    public Bill updateBill(Bill bill) {
+        Bill b = billRepository.findById(bill.getId()).get();
+        b.setNote(bill.getNote());
+        billRepository.save(b);
         return billRepository.refresh(bill);
     }
 

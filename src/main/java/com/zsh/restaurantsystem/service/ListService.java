@@ -39,8 +39,8 @@ public class ListService {
     }
 
     //当前点菜情况
-    public java.util.List<List> getListNow(int uid) {
-        return listRepository.getList(uid);
+    public java.util.List<List> getListNow(int tid) {
+        return listRepository.getList(tid);
     }
 
     //更新订单bid
